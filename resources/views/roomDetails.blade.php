@@ -38,31 +38,33 @@
             <h3 class="pageDetailsAvailability__title">Check Availability</h3>
             <div class="pageDetailsAvailability__formContainer">
                 <form class="pageDetailsAvailability__form" id="availabilityForm" method="post">
-                    <span class="pageDetailsAvailability__form__errorMsg">{{$hasError ? "Error: Check the remark field" : ""}}</span>
+                    @if ($errors->any())
+                    <span class="pageDetailsAvailability__form__errorMsg">Check the remark field</span>
+                    @endif
                     @csrf
                     <label class="pageDetailsAvailability__form-label" for="detailsCheckIn">Check In</label>
-                    <input class="pageDetailsAvailability__form-date {{$inputErrors['checkIn'] ? 'pageContactForm__form__inputError' : ''}}" type="date" name="checkIn" id="detailsCheckIn" value="{{$booking['checkIn']}}" default="2023-06-14" />
+                    <input class="pageDetailsAvailability__form-date @error('checkIn') pageContactForm__form__inputError @enderror" type="date" name="checkIn" id="detailsCheckIn" value="{{old('checkIn') ? old('checkIn') : $bookingsDates['checkIn']}}" />
                     <label class="pageDetailsAvailability__form-label" for="detailsCheckOut">Check Out</label>
-                    <input class="pageDetailsAvailability__form-date {{$inputErrors['checkOut'] ? 'pageContactForm__form__inputError' : ''}}" type="date" name="checkOut" id="detailsCheckOut" value="{{$booking['checkOut']}}" default="2023-06-16" />
+                    <input class="pageDetailsAvailability__form-date @error('checkOut') pageContactForm__form__inputError @enderror" type="date" name="checkOut" id="detailsCheckOut" value="{{old('checkOut') ? old('checkOut') : $bookingsDates['checkOut']}}" />
                     <label class="pageDetailsAvailability__form-label" for="detailsGuest">Full Name</label>
-                    <input class="pageDetailsAvailability__form-text {{$inputErrors['guest'] ? 'pageContactForm__form__inputError' : ''}}" type="text" name="guest" id="detailsGuest" value="{{$booking['guest']}}" placeholder="Type your name..." />
+                    <input class="pageDetailsAvailability__form-text @error('guest') pageContactForm__form__inputError @enderror" type="text" name="guest" id="detailsGuest" value="{{ old('guest') }}" placeholder="Type your name..." />
                     <label class="pageDetailsAvailability__form-label" for="detailsEmail">Email</label>
-                    <input class="pageDetailsAvailability__form-text {{$inputErrors['email'] ? 'pageContactForm__form__inputError' : ''}}" type="email" name="email" id="detailsEmail" value="{{$booking['email']}}" placeholder="Type your email..." />
+                    <input class="pageDetailsAvailability__form-text @error('email') pageContactForm__form__inputError @enderror" type="email" name="email" id="detailsEmail" value="{{ old('email') }}" placeholder="Type your email..." />
                     <label class="pageDetailsAvailability__form-label" for="detailsPhone">Phone</label>
-                    <input class="pageDetailsAvailability__form-text {{$inputErrors['phone'] ? 'pageContactForm__form__inputError' : ''}}" type="text" name="phone" id="detailsPhone" value="{{$booking['phone']}}" placeholder="Type your phone..." />
+                    <input class="pageDetailsAvailability__form-text @error('phone') pageContactForm__form__inputError @enderror" type="text" name="phone" id="detailsPhone" value="{{ old('phone') }}" placeholder="Type your phone..." />
                     <label class="pageDetailsAvailability__form-label" for="detailsMessage">Message (Special resquest)</label>
-                    <textarea class="pageDetailsAvailability__form-text" name="message" id="detailsMessage" cols="30" rows="3" placeholder="Type your message...">{{$booking['message']}}</textarea>
+                    <textarea class="pageDetailsAvailability__form-text" name="message" id="detailsMessage" cols="30" rows="3" placeholder="Type your message...">{{ old('message') }}</textarea>
                     <input style="display: none" name="roomId" value="{{$room['_id']}}">
                     <input class="button button-variant1 pageDetailsAvailability__form-btn" type="submit" value="CHECK AVAILABILITY" />
                 </form>
-                @if ($sentForm)
+                @if ($status = Session::get('done'))
                 <div class="pageDetailsAvailability__modalContainer" id="availabilityModal">
                     <div class="pageDetailsAvailability__modal">
                         <h2 class="pageDetailsAvailability__modal__title">
-                            {{$postMessage['title']}}
+                            {{Helpers::$bookingMessage[$status]['title']}}
                         </h2>
                         <p class="pageDetailsAvailability__modal__text">
-                            {{$postMessage['content']}}
+                            {{Helpers::$bookingMessage[$status]['content']}}
                         </p>
                         <button class="button button-variant1 pageDetailsAvailability__modal__btn" id="modalBtn">
                             ACEPT
@@ -82,7 +84,7 @@
         <h2 class="pageDetailsAmenities__title">Amenities</h2>
         <hr />
         <div class="pageDetailsAmenities__container">
-            @foreach ($amenities as $name=>$img)
+            @foreach (Helpers::$amenities as $name=>$img)
             <div class="pageDetailsAmenities__items">
                 <img class="pageDetailsAmenities__items-img" src="{{$img}}" alt="" />
                 <p class="pageDetailsAmenities__items-text">{{$name}}</p>
@@ -123,7 +125,7 @@
                     <div class="swiper-slide pageDetailsRelated__slider-slide">
                         <img class="pageDetailsRelated__slider-img" src="{{$r_room['photos'][1]}}" alt="" />
                         <div class="pageDetailsRelated__iconsBar">
-                            @foreach ($icons as $icon)
+                            @foreach (Helpers::$icons as $icon)
                             <img src="images/{{$icon}}.svg" alt="" />
                             @endforeach
                         </div>
@@ -136,7 +138,7 @@
                                 sed do eiusmod tempor.
                             </p>
                             <p class="pageRoomsGrid__legend-price">
-                                ${{$r_room['price']}}/Night &nbsp<a href="/roomDetails/{{$r_room['_id']}}">&nbsp Book Now</a>
+                                ${{$r_room['price']}}/Night &nbsp<a href="/roomDetails?id={{$r_room['_id']}}">&nbsp Book Now</a>
                             </p>
                         </div>
                     </div>

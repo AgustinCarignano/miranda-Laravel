@@ -108,7 +108,7 @@
                                 {{$room['roomType']}}
                             </h3>
                             <p class="rooms__slider__foot-text">
-                                {{text_limit($room['description'],200,"...")}}
+                                {{Helpers::text_limit($room['description'],200,"...")}}
                             </p>
                         </div>
                         <p class="rooms__slider__foot-price">

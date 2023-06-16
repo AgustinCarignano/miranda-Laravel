@@ -44,7 +44,7 @@
             <div class="pageRoomsGrid__legend">
                 <h3 class="pageRoomsGrid__legend-title">{{$room->roomType}}</h3>
                 <p class="pageRoomsGrid__legend-text">
-                    {{text_limit($room->description,140,"...")}}
+                    {{Helpers::text_limit($room->description,140,"...")}}
                 </p>
                 <p class="pageRoomsGrid__legend-price">
                     ${{$room->price}}/Night &nbsp<a href="roomDetails?id={{$room->_id}}">&nbsp Book Now</a>

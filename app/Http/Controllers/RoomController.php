@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helpers;
 use App\Models\Booking;
 use App\Models\Room;
 
@@ -9,9 +10,8 @@ class RoomController extends Controller
 {
     public function index()
     {
-        $roomsData = Room::all()->take(8);
-        $rooms = $this->formateRooms($roomsData);
-        return view('index', ['rooms' => $rooms, 'icons' => icons(), 'facilities' => facilities(), 'menues' => menues()]);
+        $rooms = Room::formatAllRooms(Room::all()->take(8));
+        return view('index', ['rooms' => $rooms, 'icons' => Helpers::$icons, 'facilities' => Helpers::$facilities, 'menues' => Helpers::$menues]);
     }
 
     public function showAll()
@@ -23,20 +23,15 @@ class RoomController extends Controller
             $rooms = Room::paginate(6);
         }
         if ($order) $rooms->appends(['priceOrder' => $order])->links();
-        foreach ($rooms as $room) {
-            $room->photos = explode(',', $room->photos);
-            $room->amenities = explode(',', $room->amenities);
-        }
-        return view('roomsGrid', ['rooms' => $rooms, 'order' => $order, 'icons' => icons()]);
+        $rooms = Room::formatAllRooms($rooms);
+        return view('roomsGrid', ['rooms' => $rooms, 'order' => $order, 'icons' => Helpers::$icons]);
     }
 
     public function offerRooms()
     {
-        $roomsData = Room::where('offer', "1")->get();
-        $popularRoomsData = Room::all()->take(3);
-        $rooms = $this->formateRooms($roomsData);
-        $popularRooms = $this->formateRooms($popularRoomsData);
-        return view('offers', ['rooms' => $rooms, 'amenities' => amenities(), 'popularRooms' => $popularRooms]);
+        $rooms = Room::formatAllRooms(Room::where('offer', "1")->get());
+        $popularRooms = Room::formatAllRooms(Room::all()->take(3));
+        return view('offers', ['rooms' => $rooms, 'amenities' => Helpers::$amenities, 'popularRooms' => $popularRooms]);
     }
 
     public function availableRooms()
@@ -59,7 +54,7 @@ class RoomController extends Controller
             $roomsData = Room::whereNotIn('_id', $ocupiedRoomsId)->paginate(6);
         }
         $roomsData->appends(['arrivalDate' => $in, 'departureDate' => $out])->links();
-        $rooms = $this->formateRooms($roomsData);
+        $rooms = Room::formatAllRooms($roomsData);
         $baseUrl = "roomDetails?arrivalDate={$in}&departureDate={$out}&id=";
         return view('roomsList', [
             'rooms' => $rooms,
@@ -67,7 +62,8 @@ class RoomController extends Controller
             'checkOut' => $out,
             'order' => $order,
             'baseUrl' => $baseUrl,
-            'icons' => icons(),
+            'icons' => Helpers::$icons,
+            // 'icons' => icons(),
         ]);
     }
 
@@ -77,48 +73,14 @@ class RoomController extends Controller
         $in = request('arrivalDate') ? request('arrivalDate') : '';
         $out = request('departureDate') ? request('departureDate') : '';
         if (!$id) return redirect('/');
-        $room = Room::find($id);
-        $room['photos'] = explode(',', $room['photos']);
-        $room['amenities'] = explode(',', $room['amenities']);
+        $room = Room::formatOneRoom(Room::find($id));
         $presentationPrice = $room['offer'] === 1 ? "pageDetailsPresentation__prices offerPrice" : "pageDetailsPresentation__prices";
-        $inpuptErrors = [
-            'checkIn' => false,
-            'checkOut' => false,
-            'guest' => false,
-            'email' => false,
-            'phone' => false,
-        ];
-        $booking = [
-            'checkIn' => $in,
-            'checkOut' => $out,
-            'guest' => '',
-            'email' => '',
-            'phone' => '',
-            'message' => '',
-            'roomId' => '',
-        ];
-        $relatedRoomsData = Room::all()->skip(3)->take(2);
-        $relatedRooms = $this->formateRooms($relatedRoomsData);
+        $relatedRooms = Room::formatAllRooms(Room::where('roomType', $room['roomType'])->whereNotIn('_id', [$room['_id']])->take(2)->get());
         return view("roomDetails", [
             "room" => $room,
-            'booking' => $booking,
-            'inputErrors' => $inpuptErrors,
-            'hasError' => false,
-            'sentForm' => false,
-            'postMessage' => '',
-            'amenities' => amenities(),
+            'bookingsDates' => ['checkIn' => $in, 'checkOut' => $out],
             'classOfferPrice' => $presentationPrice,
-            'icons' => icons(),
             'relatedRooms' => $relatedRooms
         ]);
-    }
-
-    private function formateRooms($rooms)
-    {
-        foreach ($rooms as $room) {
-            $room['photos'] = explode(',', $room['photos']);
-            $room['amenities'] = explode(',', $room['amenities']);
-        }
-        return $rooms;
     }
 }

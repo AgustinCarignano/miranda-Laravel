@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\RoomController;
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/', [RoomController::class, 'index']);
 Route::get('/aboutUs', function () {
-    return view('aboutUs', ["facilities" => facilities(), "counters" => counters()]);
+    return view('aboutUs', ["facilities" => Helpers::$facilities, "counters" => Helpers::$counters]);
 });
 Route::get('/roomsGrid', [RoomController::class, 'showAll']);
 Route::get('/roomsList', [RoomController::class, 'availableRooms']);

@@ -46,7 +46,7 @@
                 </div>
                 <h3 class="pageRoomsList__details-title">{{$room->roomType}}</h3>
                 <p class="pageRoomsList__details-text">
-                    {{text_limit($room->description,200,"...")}}
+                    {{Helpers::text_limit($room->description,200,"...")}}
                 </p>
             </div>
             <div class="pageRoomsList__price">

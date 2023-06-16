@@ -68,7 +68,7 @@
                         <div class="pageRoomsGrid__legend pageOfferPopular__slider__legend">
                             <h3 class="pageRoomsGrid__legend-title">{{$room['roomType']}}</h3>
                             <p class="pageRoomsGrid__legend-text">
-                                {{text_limit($room['description'],80,".")}}
+                                {{Helpers::text_limit($room['description'],80,".")}}
                             </p>
                             <p class="pageRoomsGrid__legend-price">
                                 {{$room['price']}}/Night &nbsp<a href="roomDetails">&nbsp Book Now</a>
