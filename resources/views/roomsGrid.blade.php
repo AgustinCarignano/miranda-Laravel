@@ -37,7 +37,7 @@
                 <img src="{{$room->photos[0]}}" alt="" />
             </div>
             <div class="pageRoomsGrid__iconsBar">
-                @foreach ($icons as $icon)
+                @foreach (Helpers::$icons as $icon)
                 <img src="images/{{$icon}}.svg" alt="" />
                 @endforeach
             </div>

@@ -40,7 +40,7 @@
             </div>
             <div class="pageRoomsList__details">
                 <div class="pageRoomsList__details-iconsBar">
-                    @foreach ($icons as $icon)
+                    @foreach (Helpers::$icons as $icon)
                     <img src="images/{{$icon}}.svg" alt="" />
                     @endforeach
                 </div>

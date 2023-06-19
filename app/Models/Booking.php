@@ -5,9 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-//Model::withoutTimestamps(fn () => $post->increment(['reads']));
-//Model::preventSilentlyDiscardingAttributes(!$this->app->isProduction());
-
 class Booking extends Model
 {
     use HasFactory;
@@ -25,5 +22,17 @@ class Booking extends Model
             'roomId' => $booking['roomId']
         ];
         return Booking::create($newBooking);
+    }
+    static function occupiedRooms($in, $out)
+    {
+        $ocupiedRoomsData = Booking::select('roomId')->where("checkIn", ">=", $in)->where("checkIn", "<=", $out)
+            ->orWhere("checkOut", ">=", $in)->where("checkOut", "<=", $out)
+            ->orWhere("checkIn", ">=", $in)->where("checkOut", "<=", $out)
+            ->orWhere("checkIn", "<=", $in)->where("checkOut", ">=", $out)->get();
+        $ocupiedRoomsId = [];
+        foreach ($ocupiedRoomsData as $room) {
+            $ocupiedRoomsId[] = $room['roomId'];
+        }
+        return $ocupiedRoomsId;
     }
 }

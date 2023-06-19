@@ -8,18 +8,6 @@ use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
-    const DEFAULT_BOOKING = [
-        'checkIn' => '',
-        'checkOut' => '',
-        'guest' => '',
-        'email' => '',
-        'phone' => '',
-        'message' => '',
-        'roomId' => '',
-    ];
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([

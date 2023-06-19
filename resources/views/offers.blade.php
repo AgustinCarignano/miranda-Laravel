@@ -34,7 +34,7 @@
             <div class="pageOffersList__amenities-container">
                 @foreach ($room['amenities'] as $amenity)
                 <div class="pageOffersList__amenities-item">
-                    <img src="{{$amenities[$amenity]}}" alt="" />
+                    <img src="{{Helpers::$amenities[$amenity]}}" alt="" />
                     <p class="pageOffersList__amenities-text">{{$amenity}}</p>
                 </div>
                 @endforeach

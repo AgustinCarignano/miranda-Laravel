@@ -98,7 +98,7 @@
     <div class="pageAboutFacility__slider">
         <div class="swiperAboutFacility">
             <div class="swiper-wrapper">
-                @foreach($facilities as $facility)
+                @foreach(Helpers::$facilities as $facility)
                 <div class="swiper-slide">
                     <div class="pageAboutFacility__item">
                         <figure class="pageAboutFacility__slider__imgs">
@@ -124,7 +124,7 @@
     <h4 class="homeSubtitle pageAboutCounter__subtitle">COUNTER</h4>
     <h2 class="homeTitle pageAboutCounter__title">Some Fun Facts</h2>
     <div class="pageAboutCounter__itemsContainer">
-        @foreach ($counters as $counter)
+        @foreach (Helpers::$counters as $counter)
         <div class="pageAboutCounter__items">
             <img src="{{$counter['img']}}" alt="{{$counter['alt']}}" />
             <div class="pageAboutCounter__items__content">

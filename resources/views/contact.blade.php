@@ -41,31 +41,33 @@
 </section>
 <section class="pageContactForm">
     <form method="post" class="pageContactForm__form" id="contactForm">
+        @if ($errors->any())
+        <span class="pageContactForm__form__errorMsg">Error: Check the remark field</span>
+        @endif
         @csrf
-        <span class="pageContactForm__form__errorMsg">{{$hasError ? "Error: Check the remark field" : ""}}</span>
-        <div class="pageContactForm__form__item {{$inputErrors['fullName'] ? 'pageContactForm__form__inputError' : ''}}" data-name="fullName">
-            <input type="text" name="fullName" value="{{$contact['fullName']}}" id="contact_fullName" placeholder="Your full name" />
+        <div class="pageContactForm__form__item @error('fullName') pageContactForm__form__inputError @enderror" data-name="fullName">
+            <input type="text" name="fullName" value="{{old('fullName')}}" id="contact_fullName" placeholder="Your full name" />
             <img src="images/contact/personIcon.svg" alt="" />
         </div>
-        <div class="pageContactForm__form__item {{$inputErrors['phone'] ? 'pageContactForm__form__inputError' : ''}}" data-name="phone">
-            <input type="text" name="phone" value="{{$contact['phone']}}" id="contact_phone" placeholder="Add phone number" />
+        <div class="pageContactForm__form__item @error('phone') pageContactForm__form__inputError @enderror" data-name="phone">
+            <input type="text" name="phone" value="{{old('phone')}}" id="contact_phone" placeholder="Add phone number" />
             <img src="images/contact/phoneIcon.svg" alt="" />
         </div>
-        <div class="pageContactForm__form__item {{$inputErrors['email'] ? 'pageContactForm__form__inputError' : ''}}" data-name="email">
-            <input type="email" name="email" value="{{$contact['email']}}" id="contact_email" placeholder="Enter email address" />
+        <div class="pageContactForm__form__item @error('email') pageContactForm__form__inputError @enderror" data-name="email">
+            <input type="email" name="email" value="{{old('email')}}" id="contact_email" placeholder="Enter email address" />
             <img src="images/contact/envelopeIcon.svg" alt="" />
         </div>
-        <div class="pageContactForm__form__item {{$inputErrors['subject'] ? 'pageContactForm__form__inputError' : ''}}" data-name="subject">
-            <input type="text" name="subject" value="{{$contact['subject']}}" id="contact_subject" placeholder="Enter subject" />
+        <div class="pageContactForm__form__item @error('subject') pageContactForm__form__inputError @enderror" data-name="subject">
+            <input type="text" name="subject" value="{{old('subject')}}" id="contact_subject" placeholder="Enter subject" />
             <img src="images/contact/bookIcon.svg" alt="" />
         </div>
-        <div class="pageContactForm__form__item-textarea {{$inputErrors['message'] ? 'pageContactForm__form__inputError' : ''}}" data-name="message">
-            <textarea name="message" value="{{$contact['message']}}" id="contact_message" cols="30" rows="10" placeholder="Tell us what you need"></textarea>
+        <div class="pageContactForm__form__item-textarea @error('message') pageContactForm__form__inputError @enderror" data-name="message">
+            <textarea name="message" value="{{old('message')}}" id="contact_message" cols="30" rows="10" placeholder="Tell us what you need"></textarea>
             <img src="images/contact/penIcon.svg" alt="" />
         </div>
         <input class="button button-variant1" type="submit" value="SEND" />
     </form>
-    @if ($formSent)
+    @if ($status = Session::get('success'))
     <div class="pageContactForm__modalContainer" id="contactModal">
         <div class="pageContactForm__modal">
             <h2 class="pageContactForm__modal__title">

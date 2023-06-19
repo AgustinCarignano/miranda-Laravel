@@ -97,7 +97,7 @@
                 @foreach ($rooms as $room)
                 <div class="swiper-slide">
                     <div class="rooms__slider__header">
-                        @foreach ($icons as $icon)
+                        @foreach (Helpers::$icons as $icon)
                         <img src="images/{{$icon}}.svg" alt="" />
                         @endforeach
                     </div>
@@ -151,7 +151,7 @@
     <h2 class="homeTitle facilities__title">Core Features</h2>
     <div class="swiperFacility">
         <div class="swiper-wrapper">
-            @foreach ($facilities as $facility)
+            @foreach (Helpers::$facilities as $facility)
             <div class="swiper-slide">
                 <div class="facilityActive">
                     <figure class="facilities__slider__imgs">
@@ -176,7 +176,7 @@
         <h2 class="homeTitle menu__title">Our Foods Menu</h2>
         <div class="swiperFoodMenu menu__options">
             <div class="swiper-wrapper">
-                @foreach ($menues as $menu)
+                @foreach (Helpers::$menues as $menu)
                 <div class="swiper-slide">
                     <div class="menu__options__column">
                         @foreach ($menu as $option)
@@ -214,7 +214,7 @@
 
         <div class="swiperMenuOption menu__options__individualSlider">
             <div class="swiper-wrapper">
-                @foreach($menues[0] as $option)
+                @foreach(Helpers::$menues[0] as $option)
                 <div class="swiper-slide">
                     <img class="menu__options__individualSlider-img" src="{{$option['img']}}" alt="" />
                 </div>
