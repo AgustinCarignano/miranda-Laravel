@@ -42,11 +42,16 @@
                     <li class="header__navbar__link">
                         <a href="/contact">Contact</a>
                     </li>
+                    <li class="header__navbar__link">
+                        <a href="/orders">Orders</a>
+                    </li>
                 </ul>
                 <div class="header__navbar__buttons">
-                    <figure class="header__navbar__buttons-icon">
-                        <img src="images/userIcon.svg" alt="user icon" />
-                    </figure>
+                    <a href="/profile">
+                        <figure class="header__navbar__buttons-icon">
+                            <img src="images/userIcon.svg" alt="user icon" />
+                        </figure>
+                    </a>
                     <figure class="header__navbar__buttons-icon">
                         <img src="images/searchIcon.svg" alt="search icon" />
                     </figure>
@@ -64,6 +69,9 @@
                 </li>
                 <li class="header__navbar__link">
                     <a href="/contact">Contact</a>
+                </li>
+                <li class="header__navbar__link">
+                    <a href="/orders">Orders</a>
                 </li>
             </ul>
         </div>

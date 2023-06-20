@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Room;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreign('userId')->references('id')->on('users_guests');
-            $table->foreign('roomId')->references('_id')->on('rooms');
+            $table->unsignedBigInteger('user_id');
+            $table->integer('room_id');
+            $table->foreign('user_id')->references('id')->on('users_guests')->onDelete('cascade');
+            $table->foreign('room_id')->references('_id')->on('rooms')->onDelete('cascade');
             $table->enum('type', ['food', 'other']);
             $table->string('description')->nullable();
             $table->timestamps();

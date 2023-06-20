@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Helpers\Helpers;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RoomController;
 
 /*
@@ -43,5 +44,7 @@ Route::get('/offers', [RoomController::class, 'offerRooms']);
 Route::get('/contact', [ContactController::class, 'index']);
 Route::post('/contact', [ContactController::class, 'store']);
 Route::get('/bookings', [BookingController::class, 'index']);
+Route::get('/orders', [OrderController::class, 'index'])->middleware(['auth', 'verified']);
+Route::post('/orders', [OrderController::class, 'store']);
 
 require __DIR__ . '/auth.php';
