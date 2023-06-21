@@ -6,6 +6,7 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
 use App\Http\Controllers\validate;
+use App\Models\Room;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,8 +18,8 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::all()->where('user_id', Auth::user()->id);
-        //dd(count($orders));
-        return view('orders', ['orders' => $orders]);
+        $rooms = Room::all();
+        return view('orders', ['orders' => $orders, 'rooms' => $rooms]);
     }
 
     /**
@@ -34,45 +35,44 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
+        $orderId = +request('orderId');
+        if ($orderId) {
+            $order = Order::find($orderId);
+            $newOrder = $order->replicate();
+            $newOrder->save();
+            return back()->with('success', 'order sent');
+        }
         $validateData = $request->validate([
             'type' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'room_id' => 'required'
         ]);
-        //dd(Auth::user());
-        // $userId = Auth::user()
-        Order::create(['user_id' => Auth::user()->id, 'room_id' => 18, Auth::user()->id, ...$validateData]);
+        Order::create(['user_id' => Auth::user()->id, ...$validateData]);
         return back()->with('success', 'order sent');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order $order)
-    {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateOrderRequest $request, Order $order)
+    public function update(UpdateOrderRequest $request)
     {
-        //
+        $validateData = $request->validate([
+            'type' => 'required',
+            'description' => 'required',
+            'room_id' => 'required'
+        ]);
+        $orderId = request('orderId');
+        Order::where('id', $orderId)->update($validateData);
+        return back()->with('success');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Order $order)
+    public function destroy()
     {
-        //
+        $orderId = +request('orderId');
+        Order::destroy($orderId);
+        return back();
     }
 }

@@ -190,4 +190,11 @@ class Helpers
         }
         return $str;
     }
+    static function orderStatus($orderTime)
+    {
+        $now = date("Y-m-d H:i:s");
+        $diff = strtotime($now) - strtotime($orderTime);
+        if ($diff < 7200) return 'In progress';
+        else return 'completed';
+    }
 }

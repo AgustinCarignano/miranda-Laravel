@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Helpers\Helpers;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
@@ -45,6 +44,8 @@ Route::get('/contact', [ContactController::class, 'index']);
 Route::post('/contact', [ContactController::class, 'store']);
 Route::get('/bookings', [BookingController::class, 'index']);
 Route::get('/orders', [OrderController::class, 'index'])->middleware(['auth', 'verified']);
-Route::post('/orders', [OrderController::class, 'store']);
+Route::post('/orders', [OrderController::class, 'store'])->name('orders.post');
+Route::delete('/orders', [OrderController::class, 'destroy'])->name('orders.destroy');
+Route::put("/orders", [OrderController::class, 'update'])->name('orders.update');
 
 require __DIR__ . '/auth.php';
