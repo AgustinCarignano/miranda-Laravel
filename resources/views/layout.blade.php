@@ -52,9 +52,23 @@
                             <img src="images/userIcon.svg" alt="user icon" />
                         </figure>
                     </a>
-                    <figure class="header__navbar__buttons-icon">
-                        <img src="images/searchIcon.svg" alt="search icon" />
-                    </figure>
+                    @if(Auth::check())
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                            <figure class="header__navbar__buttons-icon">
+                                <img src="images/checkOutIcon.svg" alt="checkout icon" />
+                            </figure>
+                        </x-dropdown-link>
+                    </form>
+                    @else
+                    <a href="/login">
+                        <figure class="header__navbar__buttons-icon">
+                            <img src="images/checkInIcon.svg" alt="checkin icon" />
+                        </figure>
+                    </a>
+                    @endif
                 </div>
             </nav>
             <ul class="header__navbar__linkList mobileNavbar initialHidden hidden" id="mobileNavbar">

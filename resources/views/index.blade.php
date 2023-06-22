@@ -28,11 +28,11 @@
             <form action="roomsList" class="banner__form">
                 <div class="banner__form__inputContainer">
                     <label class="banner__form__label" for="arrivalDate">Arrival Date</label>
-                    <input class="banner__form__dateInput" type="date" name="arrivalDate" id="arrivalDate" value="2023-03-24" />
+                    <input class="banner__form__dateInput" type="date" name="arrivalDate" id="arrivalDate" value="{{date('Y-m-d')}}" />
                 </div>
                 <div class="banner__form__inputContainer">
                     <label class="banner__form__label" for="departureDate">Departure Date</label>
-                    <input class="banner__form__dateInput" type="date" name="departureDate" id="departureDate" value="2023-03-30" />
+                    <input class="banner__form__dateInput" type="date" name="departureDate" id="departureDate" value="{{date('Y-m-d',strtotime('+3 days'))}}" />
                 </div>
                 <input class="button button-variant1" type="submit" value="CHECK AVAILABILITY" />
             </form>
@@ -101,7 +101,9 @@
                         <img src="images/{{$icon}}.svg" alt="" />
                         @endforeach
                     </div>
-                    <img class="rooms__slider__swiper-img" src="{{$room['photos'][0]}}" alt="" />
+                    <a href="/roomDetails?id={{$room['_id']}}">
+                        <img class="rooms__slider__swiper-img" src="{{$room['photos'][0]}}" alt="" />
+                    </a>
                     <div class="rooms__slider__foot">
                         <div>
                             <h3 class="rooms__slider__foot-title">

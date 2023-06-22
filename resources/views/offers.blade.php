@@ -71,7 +71,7 @@
                                 {{Helpers::text_limit($room['description'],80,".")}}
                             </p>
                             <p class="pageRoomsGrid__legend-price">
-                                {{$room['price']}}/Night &nbsp<a href="roomDetails">&nbsp Book Now</a>
+                                {{$room['price']}}/Night &nbsp<a href="roomDetails?id={{$room['_id']}}">&nbsp Book Now</a>
                             </p>
                         </div>
                     </div>

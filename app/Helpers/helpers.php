@@ -194,7 +194,7 @@ class Helpers
     {
         $now = date("Y-m-d H:i:s");
         $diff = strtotime($now) - strtotime($orderTime);
-        if ($diff < 7200) return 'In progress';
+        if ($diff < 3600) return 'In progress';
         else return 'completed';
     }
 }

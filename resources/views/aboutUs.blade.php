@@ -88,7 +88,7 @@
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
                 nisi ut aliquip.
             </p>
-            <button class="button button-variant1">TAKE A TOUR</button>
+            <a href="/#startTour"><button class="button button-variant1">TAKE A TOUR</button></a>
         </div>
     </div>
 </section>

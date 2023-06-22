@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
-use App\Http\Controllers\validate;
 use App\Models\Room;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -23,25 +21,17 @@ class OrderController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreOrderRequest $request)
     {
-        $orderId = +request('orderId');
-        if ($orderId) {
-            $order = Order::find($orderId);
-            $newOrder = $order->replicate();
-            $newOrder->save();
-            return back()->with('success', 'order sent');
-        }
+        // $orderId = +request('orderId');
+        // if ($orderId) {
+        //     $order = Order::find($orderId);
+        //     $newOrder = $order->replicate();
+        //     $newOrder->save();
+        //     return back()->with('success', 'order sent');
+        // }
         $validateData = $request->validate([
             'type' => 'required',
             'description' => 'required',
