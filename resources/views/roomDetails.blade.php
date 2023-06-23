@@ -19,7 +19,7 @@
                         Room {{$room['roomNumber']}}
                     </h2>
                 </div>
-                <div class="{{$classOfferPrice}}">
+                <div class="pageDetailsPresentation__prices {{$room['offer'] === 1 ? ' offerPrice' : ''}}">
                     <div class="pageDetailsPresentation__prices-item">
                         <p>${{$room['price']}}</p>
                         <small>/Night</small>

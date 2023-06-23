@@ -71,7 +71,7 @@
                 <form class="pageOrderLast__actionsContainer__form editOrderForm" data-orderid="{{$order['id']}}" method="post" action="{{ route('orders.update') }}">
                     @csrf @method('put')
                     <input type="text" name="orderId" value="{{$order['id']}}" hidden />
-                    <button class="pageOrderLast__actionsContainer__btn">
+                    <button class="pageOrderLast__actionsContainer__btn pageOrderLast__editIcon">
                         <img src="images/contact/penIcon.svg" alt="trash icon" />
                     </button>
                     <div class="pageContactForm__modalContainer pageContactForm__modalContainer-hidden" id="editOrderModal-{{$order['id']}}">
@@ -117,8 +117,8 @@
                     @csrf
                     @method('delete')
                     <input type="text" name="orderId" value="{{$order['id']}}" hidden />
-                    <button class="pageOrderLast__actionsContainer__btn">
-                        <img src="images/contact/cancelIcon.svg" alt="trash icon" />
+                    <button class="pageOrderLast__actionsContainer__btn pageOrderLast__cancelIcon">
+                        <img src="images/contact/cancelIcon.svg" alt="cancel icon" />
                     </button>
                 </form>
                 @else
@@ -126,7 +126,7 @@
                 <form class="pageOrderLast__actionsContainer__form repeatOrderForm" data-orderid="{{$order['id']}}" method="post" action="{{ route('orders.post') }}">
                     @csrf
                     <input type="text" name="orderId" value="{{$order['id']}}" hidden />
-                    <button class="pageOrderLast__actionsContainer__btn">
+                    <button class="pageOrderLast__actionsContainer__btn pageOrderLast__repeatIcon">
                         <img src="images/contact/repeatIcon.svg" alt="trash icon" />
                     </button>
 
@@ -171,7 +171,7 @@
                 <form class="pageOrderLast__actionsContainer__form deleteOrderForm" method="post" action="{{ route('orders.destroy') }}">
                     @csrf @method('delete')
                     <input type="text" name="orderId" value="{{$order['id']}}" hidden />
-                    <button class="pageOrderLast__actionsContainer__btn">
+                    <button class="pageOrderLast__actionsContainer__btn pageOrderLast__trashIcon">
                         <img src="images/contact/trashIcon.svg" alt="trash icon" />
                     </button>
                 </form>

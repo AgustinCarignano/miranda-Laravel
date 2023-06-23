@@ -60,10 +60,9 @@ class RoomController extends Controller
     public function show()
     {
         $id = request('id');
-        if (!$id) abort(404, '404: Room not found');
-        $in = request('arrivalDate') ? request('arrivalDate') : '';
-        $out = request('departureDate') ? request('departureDate') : '';
         if (!$id) return redirect('/');
+        $in = request('arrivalDate') ?? '';
+        $out = request('departureDate') ?? '';
         $roomDB = Room::find($id);
         if (!$roomDB) abort(404, '404: Room not found');
         $room = Room::formatOneRoom($roomDB);
