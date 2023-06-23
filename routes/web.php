@@ -44,8 +44,8 @@ Route::get('/contact', [ContactController::class, 'index']);
 Route::post('/contact', [ContactController::class, 'store']);
 Route::get('/bookings', [BookingController::class, 'index']);
 Route::get('/orders', [OrderController::class, 'index'])->middleware(['auth', 'verified']);
-Route::post('/orders', [OrderController::class, 'store'])->name('orders.post');
-Route::delete('/orders', [OrderController::class, 'destroy'])->name('orders.destroy');
-Route::put("/orders", [OrderController::class, 'update'])->name('orders.update');
+Route::post('/orders', [OrderController::class, 'store'])->middleware(['auth', 'verified'])->name('orders.post');
+Route::delete('/orders', [OrderController::class, 'destroy'])->middleware(['auth', 'verified'])->name('orders.destroy');
+Route::put("/orders", [OrderController::class, 'update'])->middleware(['auth', 'verified'])->name('orders.update');
 
 require __DIR__ . '/auth.php';

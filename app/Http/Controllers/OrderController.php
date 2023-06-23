@@ -25,13 +25,6 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        // $orderId = +request('orderId');
-        // if ($orderId) {
-        //     $order = Order::find($orderId);
-        //     $newOrder = $order->replicate();
-        //     $newOrder->save();
-        //     return back()->with('success', 'order sent');
-        // }
         $validateData = $request->validate([
             'type' => 'required',
             'description' => 'required',
@@ -61,7 +54,7 @@ class OrderController extends Controller
      */
     public function destroy()
     {
-        $orderId = +request('orderId');
+        $orderId = request('orderId');
         Order::destroy($orderId);
         return back();
     }
