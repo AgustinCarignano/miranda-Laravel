@@ -13,7 +13,7 @@
 
 </div>
 
-Este es el repositorio de la página web del [Hotel Miranda](https://agustincarignano.github.io/mirandaHotel), una cadena de hoteles de lujo. Proporciona información sobre los servicios ofrecidos, las habitaciones y sus amenities, permite realizar reservas y facilita el contacto para obtener más información.
+Repositorio de la página web del [Hotel Miranda](http://ec2-13-39-155-249.eu-west-3.compute.amazonaws.com/), una cadena de hoteles de lujo. Proporciona información sobre los servicios ofrecidos, las habitaciones y sus amenities, permite realizar reservas y facilita el contacto para obtener más información.
 
 ## Características
 
@@ -21,14 +21,15 @@ Este es el repositorio de la página web del [Hotel Miranda](https://agustincari
 -   Permite a los usuarios ver las habitaciones disponibles y sus características.
 -   Los usuarios pueden realizar reservas de habitaciones seleccionadas.
 -   Ofrece un formulario de contacto para que los usuarios puedan obtener más información o realizar consultas adicionales.
+-   implementa un sistema de registro y login de usuarios para acceder a servicios de la habitación
 
 ## Tecnologías utilizadas
 
 Esta pagina web fue primeramente desarrollada utilizando HTML5, SASS como preprocesador de estilos y JavaScript para implementar toda la funcionalidad.
 
-Mas tarde se migro a una aplicacion utilizando Laravel, para poder obtener un producto final completamente funcional, con persistencia en base de datos (MySQL), y siguiendo el modelo MVC.
+Mas tarde se migro a una aplicacion de Laravel, para poder obtener un producto final completamente funcional, con persistencia en base de datos (MySQL), y siguiendo el modelo MVC.
 
-Ademas, se incorpora un sistema de logue de invitados, permitiendole ingresar a una seccion donde puede realizar pedidos o servicio a la habitacion.
+Ademas, se incorpora un sistema de logueo de invitados, permitiendole ingresar a una seccion donde puede realizar pedidos o servicio a la habitacion.
 
 Esta basado en un diseño validado por clientes, completamente responsivo y desarrollado siguiendo el paradigma "Mobile First".
 
