@@ -44,12 +44,12 @@
     <div class="pageContactForm__modalContainer" id="orderModal">
         <div class="pageContactForm__modal">
             <h2 class="pageContactForm__modal__title">
-                ¡Thank you for contact us!
+                ¡Thank you for your order!
             </h2>
             <p class="pageContactForm__modal__text">
                 We have received it correctly. <br />
-                Someone from our Team will get <br />
-                back to you very soon.
+                Someone from our staff will take <br />
+                it to your room very soon.
             </p>
             <button class="button button-variant1 pageContactForm__modal__btn" id="orderModalBtn">
                 ACEPT
